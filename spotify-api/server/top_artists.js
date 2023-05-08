@@ -18,7 +18,8 @@ router.get('/', async (req, res) => {
             name: artistObject.name,
             popularity: artistObject.popularity,
             id: artistObject.id,
-            genre: artistObject.genres[0]
+            genre: artistObject.genres.join(', '),
+            link: artistObject.external_urls.spotify
         }
     });
     res.send({

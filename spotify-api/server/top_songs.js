@@ -20,6 +20,7 @@ router.get('/', async (req, res) => {
       duration: Math.trunc(trackObject.duration_ms / 1000),
       name: trackObject.name,
       id: trackObject.id,
+      popularity: trackObject.popularity
     }
   });
   res.send({

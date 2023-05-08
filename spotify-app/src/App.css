@@ -8,30 +8,50 @@
   height: 100vh;
 }
 
-.welcome-img {
-  width: 50%;
-  max-width: 300px;
-  margin-bottom: 24px;
-  border-radius: 50%;
-}
 
-button[name="loginButton"] {
-  border-radius: 8px;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  padding: 12px 24px;
-  background-color: #4caf50;
-  color: #fff;
-  cursor: pointer;
-  outline: none;
-  border: none;
-}
-
-button[name="loginButton"]:hover {
-  background-color: #3e8e41;
-}
-
+/* Styling the title */
 h1 {
   font-family: 'Darumadrop One', cursive;
-  font-size: 30px;
+  font-size: 100px;
+}
+
+.rotated-title {
+	font-weight: bold;
+	letter-spacing: 10px;
+}
+
+.rotated-title span {
+	display:inline-block;
+}
+
+.rotated-title span:nth-child(even) {
+  transform: rotate(10deg);
+}
+
+.rotated-title span:nth-child(odd) {
+  transform: rotate(-10deg);
+  margin-right: 10px;
+}
+
+/* login button styling */
+button[name="loginButton"] {
+  border: none;
+  background-color: transparent;
+}
+button[name="loginButton"] img {
+  width: 300px;
+  border-radius: 50%;
+}
+button[name="loginButton"]:hover {
+  opacity: 0.8;
+}
+
+/* Footer link styling */
+a {
+  text-decoration: none;
+  color: #88aad8;
+}
+
+a:hover {
+  color: #98b8ec;
 }

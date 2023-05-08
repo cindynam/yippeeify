@@ -36,15 +36,20 @@ function App() {
     <>
       {token === null ? (
         <div className="title-page">
-        <h1>yippee! hello! welcome to yippeeify!</h1>
-        <img src="./welcome.png" alt="welcome-image" class="welcome-img"></img>
-        <button name="loginButton" onClick={userLogin}>Login to Spotify</button>
-      </div>
+          <h1 className="rotated-title">
+            <span>y</span><span>i</span><span>p</span><span>p</span><span>e</span><span>e</span><span>i</span><span>f</span><span>y</span></h1>
+          <h2>yippee! welcome! click the cat to login to spotify!</h2>
+          <button name="loginButton" onClick={userLogin}>
+            <img src="./welcome2.png" alt="welcome-image" className="welcome-img"></img></button>
+        </div>
       ) : (
         <>
           <MainPage token={token} userLogout={userLogout} />
         </>
       )}
+      <div className="footer">
+        <p>Created by <a href="https://github.com/cindynam">Cindy Nam</a></p>
+      </div>
     </>
   )
 };

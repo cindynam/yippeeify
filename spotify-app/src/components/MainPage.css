@@ -2,7 +2,7 @@ body {
   background-color: #c8d8f1;
   color: #88aad8;
   font-family: 'Darumadrop One', cursive;
-  
+
 }
 
 .logout-button {
@@ -24,57 +24,15 @@ body {
   margin: 0 20px;
 }
 
-.song-grid,
-.artist-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-}
-
-.song-container,
-.artist-container {
-  position: relative;
-}
-
-.song-image,
-.artist-image {
-  width: 100%;
-  height: auto;
-}
-
-.song-overlay,
-.artist-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.song-container:hover .song-overlay,
-.artist-container:hover .artist-overlay {
-  opacity: 1;
-}
-
-.song-details,
-.artist-details {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #fff;
-}
-
+/* Styling for category buttons */
 .category-button-group {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 20px 0;
+  
 }
+
 .category-button {
   background-color: #fff;
   color: #000;
@@ -83,24 +41,120 @@ body {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 15px;
-  margin: 4px 2px;
+  font-size: 20px;
+  margin: 4px;
   cursor: pointer;
   border-radius: 5px;
+  font-family: 'Darumadrop One', cursive;
 }
 
-.category-button:hover {
-  background-color: #000;
-}
-
+.category-button:hover,
 .category-button.active {
-  background-color: #0077ff;
+  background-color: #88aad8;
+  color: white;
+}
+
+/* Styling for timeframe buttons */
+.artist-timeframe-buttons, .song-timeframe-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.artist-timeframe-buttons button, .song-timeframe-buttons button {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: 'Darumadrop One', cursive;
+}
+
+.song-timeframe-buttons button:hover,
+.song-timeframe-buttons button.active,
+.artist-timeframe-buttons button:hover,
+.artist-timeframe-buttons button.active {
+  background-color: #88aad8;
+  color: white;
+}
+
+/* Centers the grid of songs or artists */
+.stats-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* Grid styling for songs and artists */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 300px);
+  grid-gap: 0px;
+}
+
+.container {
+  position: relative;
+  width: 300px;
+  height: 300px;  
+}
+
+.image {
+  width: 300px;
+  height: 300px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 300px;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.container:hover .overlay {
+  opacity: 1;
+}
+
+.details {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
   color: #fff;
 }
 
-.category-button.active:hover {
-  background-color: #0066cc;
+/* Styling for song links */
+p a {
+  color:#fff
 }
+
+h2 {
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h3 {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
 
 /* Centering the footer which includes the logout button */
 .footer {
@@ -109,7 +163,7 @@ body {
   align-items: center;
 }
 
-/*logout button*/
+/* Logout button */
 button[name="logoutButton"] {
   display: flex;
   justify-content: center;
