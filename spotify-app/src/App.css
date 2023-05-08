@@ -1,0 +1,37 @@
+/* App.css */
+
+.title-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.welcome-img {
+  width: 50%;
+  max-width: 300px;
+  margin-bottom: 24px;
+  border-radius: 50%;
+}
+
+button[name="loginButton"] {
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  padding: 12px 24px;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  border: none;
+}
+
+button[name="loginButton"]:hover {
+  background-color: #3e8e41;
+}
+
+h1 {
+  font-family: 'Darumadrop One', cursive;
+  font-size: 30px;
+}
