@@ -146,15 +146,54 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 0;
 }
 
 h3 {
   font-size: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;   
+  margin: 0;
+  padding-bottom: 15px;
 }
 
+/* Styling for the loading screen */
+.loading {
+  color: white;
+  margin: 0;
+  padding: 0;
+  height: 150px;
+  margin-top: 5px;
+  border: 1px dotted #88aad8;
+  border-radius: 12px;
+  background-color: #88aad8;
+}
+
+/* playlist button */
+.playlist-button {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: 'Darumadrop One', cursive;
+}
+
+/* Styling for the embedded playlist */
+.embedPlayer {
+  margin-top: 5px;
+  border-radius: 0px;
+  border: 0px;
+}
 
 /* Centering the footer which includes the logout button */
 .footer {

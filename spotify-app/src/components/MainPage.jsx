@@ -4,17 +4,22 @@ import { getUserData } from './userData';
 import { fetchTopSongs } from './topSongs';
 import { fetchTopArtists } from './topArtists';
 import { fetchRecommendedSongs } from './recommendedSongs';
+import { createPlaylist } from './createPlaylist';
+
 
 export default function MainPage({ token, userLogout }) {
   const [userData, setUserData] = useState([]);
   const [topSongs, setTopSongs] = useState([]);
   const [topArtists, setTopArtists] = useState([]);
   const [recommendedSongs, setRecommendedSongs] = useState([]);
+  const [playlistLink, setPlaylistLink] = useState('');
+  const [showPlaylist, setShowPlaylist] = useState(false);
   const [songTimeframe, setSongTimeframe] = useState('short_term');
   const [artistTimeframe, setArtistTimeframe] = useState('short_term');
   const [displayTopSongs, setDisplayTopSongs] = useState(true);
   const [displayRecommended, setDisplayRecommended] = useState(false);
   const [displayTopArtists, setDisplayTopArtists] = useState(false);
+
 
 
   // Format the duration of the song to minutes:seconds
@@ -26,10 +31,21 @@ export default function MainPage({ token, userLogout }) {
     return str;
   }
 
+  // Fetches recommended songs from the Spotify API and updates the recommendedSongs page..
   const fetchRecommendedData = async () => {
     const recommendedSongsData = await fetchRecommendedSongs(token);
     setRecommendedSongs(recommendedSongsData.data);
   };
+
+
+  const createRecommendedPlaylist = async () => {
+    setShowPlaylist('loading');
+    let songUris = recommendedSongs.map(song => song.uri).join(',');
+    let playlistData = await createPlaylist(token, userData.id, songUris);
+    let link = `https://open.spotify.com/embed/playlist/${playlistData.playlistId}?utm_source=generator`
+    setPlaylistLink(link);
+    setShowPlaylist(true);
+  }
 
 
   // Fetches user data from the Spotify API and updates the userData state.
@@ -68,9 +84,11 @@ export default function MainPage({ token, userLogout }) {
     fetchData();
   }, [token, artistTimeframe]);
 
+  // Fetches recommended songs from the Spotify API.
   useEffect(() => {
     fetchRecommendedData();
   }, [token]);
+
 
 
   return (
@@ -110,6 +128,8 @@ export default function MainPage({ token, userLogout }) {
             let button = document.querySelector(".active");
             if (button.innerHTML === "Recommended") {
               fetchRecommendedData();
+              setPlaylistLink('');
+              setShowPlaylist(false);
             }
           }}>Recommended</button>
       </div>
@@ -171,7 +191,7 @@ export default function MainPage({ token, userLogout }) {
             <h2> Recommended for you!</h2>
             <h3> (pssst! you can click the button again to get new recommendations!)</h3>
             <div className="grid">
-              {recommendedSongs.slice(0, 9).map(song => (
+              {recommendedSongs?.slice(0, 9).map(song => (
                 <div className="container">
                   <img className="image" src={song.image} alt={song.name} />
                   <div className="overlay">
@@ -182,14 +202,20 @@ export default function MainPage({ token, userLogout }) {
                       <p>Popularity: {song.popularity}</p>
                       {song.previewUrl === null ? <p>Preview not available</p> :
                         <p>
-                        <audio controls>
-                          <source src={song.previewUrl} type='audio/mp3' />
-                        </audio>
-                      </p>}
+                          <audio controls>
+                            <source src={song.previewUrl} type='audio/mp3' />
+                          </audio>
+                        </p>}
                     </div>
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="playlist" >
+              {showPlaylist === false ? <button className="playlist-button" onClick={() => createRecommendedPlaylist()}>make it into a playlist!</button> :
+                (showPlaylist === 'loading' ? <h2 className="loading">loading...</h2> :
+                  <iframe className='embedPlayer' src={playlistLink} width="100%" height="152" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                )}
             </div>
           </div>
         )

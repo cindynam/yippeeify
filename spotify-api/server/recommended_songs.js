@@ -30,6 +30,7 @@ router.get('/', async (req, res) => {
             link: track.external_urls.spotify,
             popularity: track.popularity,
             duration: Math.trunc(track.duration_ms / 1000),
+            uri: track.uri,
             previewUrl: track.preview_url
         }
     });

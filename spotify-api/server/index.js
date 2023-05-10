@@ -10,6 +10,7 @@ const userRouter = require('./user');
 const topSongsRouter = require('./top_songs');
 const topArtistsRouter = require('./top_artists');
 const recommendedSongsRouter = require('./recommended_songs');
+const createPlaylistRouter = require('./create_playlist');
 
 app.use(cors());
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use('/user', userRouter);
 app.use('/topsongs', topSongsRouter);
 app.use('/topartists', topArtistsRouter);
 app.use('/recommendedsongs', recommendedSongsRouter);
+app.use('/createplaylist', createPlaylistRouter);
 
 
 

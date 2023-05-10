@@ -7,7 +7,7 @@ const SPOTIFY_CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
 const SPOTIFY_REDIRECT_URI = process.env.SPOTIFY_REDIRECT_URI;
 
 router.get('/login', async (req, res) => {
-  let scope = 'user-read-private user-read-email user-top-read user-library-read playlist-modify-private playlist-modify-public';
+  let scope = 'user-read-private user-read-email user-top-read user-library-read playlist-modify-private playlist-modify-public ugc-image-upload';
   res.send({ url: `https://accounts.spotify.com/authorize?client_id=${SPOTIFY_CLIENT_ID}&response_type=code&redirect_uri=${SPOTIFY_REDIRECT_URI}&scope=${scope}` });
 });
 
