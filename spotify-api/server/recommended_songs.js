@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 
     // get recommended tracks based on top tracks
-    let data = await fetch(`https://api.spotify.com/v1/recommendations?seed_tracks=${trackSeeds}`, {
+    let data = await fetch(`https://api.spotify.com/v1/recommendations?seed_tracks=${trackSeeds}&max_popularity=75`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
