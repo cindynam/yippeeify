@@ -4,10 +4,9 @@ import MainPage from './components/MainPage';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
-
   if (!token && window.location.href.includes('callback')) {
     let auth_code = window.location.href.split('code=')[1];
-    fetch('http://localhost:3001/token', {
+    fetch(`${import.meta.env.VITE_REACT_API}/token`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -22,7 +21,7 @@ function App() {
   }
 
   const userLogin = async () => {
-    let url = await fetch('http://localhost:3001/login');
+    let url = await fetch(`${import.meta.env.VITE_REACT_API}/login`);
     url = await url.json();
     window.location.replace(url.url);
   }

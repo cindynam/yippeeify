@@ -1,5 +1,5 @@
 export const getUserData = async (token) => {
-    let userData = await fetch(`http://localhost:3001/user?token=${token}`, {
+    let userData = await fetch(`${import.meta.env.VITE_REACT_API}/user?token=${token}`, {
         method: 'GET',
     });
     userData = await userData.json();

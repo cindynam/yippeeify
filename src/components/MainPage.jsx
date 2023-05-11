@@ -214,7 +214,7 @@ export default function MainPage({ token, userLogout }) {
             <div className="playlist" >
               {showPlaylist === false ? <button className="playlist-button" onClick={() => createRecommendedPlaylist()}>make it into a playlist!</button> :
                 (showPlaylist === 'loading' ? <h2 className="loading">loading...</h2> :
-                  <iframe className='embedPlayer' src={playlistLink} width="100%" height="152" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                  <iframe className='embedPlayer' src={playlistLink} width="100%" height="152" allowFullScreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 )}
             </div>
           </div>

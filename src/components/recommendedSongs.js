@@ -1,5 +1,5 @@
 export const fetchRecommendedSongs = async (token) => {
-    let recommendedSongs = await fetch(`http://localhost:3001/recommendedsongs?token=${token}`,{
+    let recommendedSongs = await fetch(`${import.meta.env.VITE_REACT_API}/recommendedsongs?token=${token}`,{
         method: 'GET',
     });
     recommendedSongs = await recommendedSongs.json();
