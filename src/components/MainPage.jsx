@@ -37,12 +37,11 @@ export default function MainPage({ token, userLogout }) {
     setRecommendedSongs(recommendedSongsData.data);
   };
 
-
   const createRecommendedPlaylist = async () => {
     setShowPlaylist('loading');
     let songUris = recommendedSongs.map(song => song.uri).join(',');
     let playlistData = await createPlaylist(token, userData.id, songUris);
-    let link = `https://open.spotify.com/embed/playlist/${playlistData.playlistId}?utm_source=generator`
+    let link = `https://open.spotify.com/embed/playlist/${playlistData.playlistId}`
     setPlaylistLink(link);
     setShowPlaylist(true);
   }
@@ -214,7 +213,7 @@ export default function MainPage({ token, userLogout }) {
             <div className="playlist" >
               {showPlaylist === false ? <button className="playlist-button" onClick={() => createRecommendedPlaylist()}>make it into a playlist!</button> :
                 (showPlaylist === 'loading' ? <h2 className="loading">loading...</h2> :
-                  <iframe className='embedPlayer' src={playlistLink} width="100%" height="152" allowFullScreen allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                  <iframe className='embedPlayer' src={playlistLink} width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; fullscreen" loading="eager"></iframe>
                 )}
             </div>
           </div>

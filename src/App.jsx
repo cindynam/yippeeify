@@ -4,7 +4,7 @@ import MainPage from './components/MainPage';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
-  if (!token && window.location.href.includes('code=')) {
+  if (!token && window.location.href.includes('code')) {
     let auth_code = window.location.href.split('code=')[1];
     fetch(`${import.meta.env.VITE_REACT_API}/token`, {
       method: 'POST',
@@ -16,7 +16,7 @@ function App() {
       t.json()
     ).then((t) => {
       localStorage.setItem('token', t.token);
-      window.location.replace(import.meta.env.VITE_REACT_API);
+      window.location.replace(import.meta.env.VITE_REACT_URL);
     });
   }
 
