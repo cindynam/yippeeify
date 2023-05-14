@@ -33,9 +33,10 @@ export default function MainPage({ token, userLogout }) {
     return str;
   }
 
+  // Download the stats as a png image.
   const imageDownload = () => {
     const grid = document.querySelector('.grid');
-    DomToImage.toPng(grid).then((dataUrl) => {  
+    DomToImage.toPng(grid).then((dataUrl) => {
       const link = document.createElement('a');
       link.download = 'yippeeify-stats.png';
       link.href = dataUrl;
@@ -57,7 +58,8 @@ export default function MainPage({ token, userLogout }) {
     let playlistData = await createPlaylist(token, userData.id, songUris);
     let link = `https://open.spotify.com/embed/playlist/${playlistData.playlistId}`
     setPlaylistLink(link);
-    setTimeout(()=>{
+    // Wait 2 seconds before displaying the playlist to make sure the embed is displayed properly.
+    setTimeout(() => {
       setShowPlaylist(true);
     }, 2000);
   }
@@ -109,7 +111,13 @@ export default function MainPage({ token, userLogout }) {
   return (
     <>
       <div className="logout">
-        <button className="logout-button" onClick={() => userLogout()}>Logout</button>
+        <button
+          className="button"
+          id="logout-button"
+          onClick={() => userLogout()}
+        >
+          Logout
+        </button>
       </div>
       {/* Display user info with a greeting */}
       {userData && (
@@ -153,10 +161,13 @@ export default function MainPage({ token, userLogout }) {
             showPlaylist={showPlaylist}
             formatDuration={formatDuration}
           />
-        )
-        }
+        )}
       </div>
-      <button type="button" onClick={imageDownload} id="downloadButton">
+      <button
+        className="button"
+        id="download-button"
+        onClick={imageDownload}
+      >
         Download Image
       </button>
     </>
