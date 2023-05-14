@@ -6,7 +6,6 @@ body {
 }
 
 /* Logout button */
-#downloadButton,
 .logout {
   display: flex;
   justify-content: right;
@@ -33,6 +32,12 @@ body {
 .logout-button:hover {
   background-color: #88aad8;
   color: white;
+}
+
+#downloadButton {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 
@@ -250,11 +255,9 @@ h3 {
   border: 0px;
 }
 
-
-
-/* Centering the footer which includes the logout button
+/* Centering the footer */
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
-} */
+}
