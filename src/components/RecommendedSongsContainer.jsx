@@ -1,4 +1,4 @@
-export default function RecommendedSongsContainer({ recommendedSongs, showPlaylist, createRecommendedPlaylist, playlistLink, formatDuration }) {
+export default function RecommendedSongsContainer({ recommendedSongs, showPlaylist, createRecommendedPlaylist, playlistLink, formatDuration}) {
     return (
         <div className="recommended-songs">
             <h2> Recommended for you!</h2>
@@ -27,15 +27,17 @@ export default function RecommendedSongsContainer({ recommendedSongs, showPlayli
             <div className="playlist" >
                 {showPlaylist === false ? (
                     <button className="playlist-button" onClick={() => createRecommendedPlaylist()}>
-                        make it into a playlist!
+                        Make it into a playlist!
                     </button>
                 ) : showPlaylist === 'loading' ? (<div className="loading" />) : (
                     <iframe
                         className='embedPlayer'
                         src={playlistLink}
+                        key={playlistLink}
                         width="100%"
                         height="152"
                         allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; fullscreen"
+                        loading="eager"
                     >
                     </iframe>
                 )}

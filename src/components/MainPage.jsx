@@ -57,7 +57,9 @@ export default function MainPage({ token, userLogout }) {
     let playlistData = await createPlaylist(token, userData.id, songUris);
     let link = `https://open.spotify.com/embed/playlist/${playlistData.playlistId}`
     setPlaylistLink(link);
-    setShowPlaylist(true);
+    setTimeout(()=>{
+      setShowPlaylist(true);
+    }, 2000);
   }
 
 

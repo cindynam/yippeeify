@@ -28,6 +28,7 @@ body {
   font-family: 'Darumadrop One', cursive;
 }
 
+.playlist-button:hover,
 #downloadButton:hover,
 .logout-button:hover {
   background-color: #88aad8;
@@ -200,28 +201,41 @@ h3 {
   margin-top: 5px;
   border: 1px dotted #88aad8;
   border-radius: 12px;
-  background-color: #88aad8;
+  background-image: linear-gradient(to right, #88aad8, #5684c4, #88aad8);
+  background-size: 200%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 25px;
+  animation: loadingFade 2s linear infinite;
 }
+
+
 
 .loading::after {
   content: "...";
-  animation: ellipsis 1.3s infinite;
+  animation: ellipsis 1s infinite alternate;
+}
+
+@keyframes loadingFade {
+	0% {
+		background-position: 0%;
+	}
+	50% {
+		background-position: 100%;
+	}
+	100% {
+		background-position: 200%;
+	}
 }
 
 @keyframes ellipsis {
-  0% {
-    content: "Loading";
-  }
 
-  33% {
+  0% {
     content: "Loading.";
   }
 
-  66% {
+  50% {
     content: "Loading..";
   }
 
@@ -242,7 +256,7 @@ h3 {
   font-size: 20px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5px;
+  margin-top: 24px;
   cursor: pointer;
   border-radius: 5px;
   font-family: 'Darumadrop One', cursive;
