@@ -1,26 +1,28 @@
-import { useState, useEffect } from 'react';
 import './MainPage.css';
-import { getUserData } from './userData';
-import { fetchTopSongs } from './topSongs';
-import { fetchTopArtists } from './topArtists';
-import { fetchRecommendedSongs } from './recommendedSongs';
-import { createPlaylist } from './createPlaylist';
-
+import DomToImage from 'dom-to-image';
+import TopSongsContainer from './TopSongsContainer';
+import CategoryButtonsContainer from './CategoryButtonsContainer';
+import TopArtistsContainer from './TopArtistsContainer';
+import RecommendedSongsContainer from './RecommendedSongsContainer';
+import { useState, useEffect } from 'react';
+import { getUserData } from '../functions/userData';
+import { fetchTopSongs } from '../functions/topSongs';
+import { fetchTopArtists } from '../functions/topArtists';
+import { fetchRecommendedSongs } from '../functions/recommendedSongs';
+import { createPlaylist } from '../functions/createPlaylist';
 
 export default function MainPage({ token, userLogout }) {
   const [userData, setUserData] = useState([]);
   const [topSongs, setTopSongs] = useState([]);
   const [topArtists, setTopArtists] = useState([]);
   const [recommendedSongs, setRecommendedSongs] = useState([]);
-  const [playlistLink, setPlaylistLink] = useState('');
   const [showPlaylist, setShowPlaylist] = useState(false);
-  const [songTimeframe, setSongTimeframe] = useState('short_term');
-  const [artistTimeframe, setArtistTimeframe] = useState('short_term');
   const [displayTopSongs, setDisplayTopSongs] = useState(true);
   const [displayRecommended, setDisplayRecommended] = useState(false);
   const [displayTopArtists, setDisplayTopArtists] = useState(false);
-
-
+  const [songTimeframe, setSongTimeframe] = useState('short_term');
+  const [artistTimeframe, setArtistTimeframe] = useState('short_term');
+  const [playlistLink, setPlaylistLink] = useState('');
 
   // Format the duration of the song to minutes:seconds
   const formatDuration = (seconds) => {
@@ -31,12 +33,24 @@ export default function MainPage({ token, userLogout }) {
     return str;
   }
 
-  // Fetches recommended songs from the Spotify API and updates the recommendedSongs page..
+  const imageDownload = () => {
+    const grid = document.querySelector('.grid');
+    DomToImage.toPng(grid).then((dataUrl) => {  
+      const link = document.createElement('a');
+      link.download = 'yippeeify-stats.png';
+      link.href = dataUrl;
+      link.click();
+    });
+  }
+
+
+  // Fetches recommended songs from the Spotify API and updates the recommendedSongs page.
   const fetchRecommendedData = async () => {
     const recommendedSongsData = await fetchRecommendedSongs(token);
     setRecommendedSongs(recommendedSongsData.data);
   };
 
+  // Creates a playlist from the recommended songs and updates the playlistLink state.
   const createRecommendedPlaylist = async () => {
     setShowPlaylist('loading');
     let songUris = recommendedSongs.map(song => song.uri).join(',');
@@ -83,7 +97,7 @@ export default function MainPage({ token, userLogout }) {
     fetchData();
   }, [token, artistTimeframe]);
 
-  // Fetches recommended songs from the Spotify API.
+  // Fetches recommended songs for the user from the Spotify API.
   useEffect(() => {
     fetchRecommendedData();
   }, [token]);
@@ -92,8 +106,8 @@ export default function MainPage({ token, userLogout }) {
 
   return (
     <>
-      <div className="logout-button">
-        <button name="logoutButton" onClick={() => userLogout()}>Logout</button>
+      <div className="logout">
+        <button className="logout-button" onClick={() => userLogout()}>Logout</button>
       </div>
       {/* Display user info with a greeting */}
       {userData && (
@@ -102,127 +116,47 @@ export default function MainPage({ token, userLogout }) {
           <h1>Hello, {userData.username}!</h1>
         </div>
       )}
-      <div className="category-button-group">
-        <button
-          className={`category-button ${displayTopSongs ? "active" : ""}`}
-          onClick={() => {
-            setDisplayTopSongs(true);
-            setDisplayTopArtists(false);
-            setDisplayRecommended(false);
-          }}>Top Songs</button>
-        <button
-          className={`category-button ${displayTopArtists ? "active" : ""}`}
-          onClick={() => {
-            setDisplayTopSongs(false);
-            setDisplayTopArtists(true);
-            setDisplayRecommended(false);
-          }}>Top Artists</button>
-        <button
-          className={`category-button ${displayRecommended ? "active" : ""}`}
-          onClick={() => {
-            setDisplayTopSongs(false);
-            setDisplayTopArtists(false);
-            setDisplayRecommended(true);
-            // Refreshes the recommended songs when the button is clicked
-            let button = document.querySelector(".active");
-            if (button.innerHTML === "Recommended") {
-              fetchRecommendedData();
-              setPlaylistLink('');
-              setShowPlaylist(false);
-            }
-          }}>Recommended</button>
-      </div>
+      {/* Display buttons to switch between top songs, top artists, and recommended songs */}
+      <CategoryButtonsContainer
+        displayTopSongs={displayTopSongs}
+        setDisplayTopSongs={setDisplayTopSongs}
+        displayRecommended={displayRecommended}
+        setDisplayRecommended={setDisplayRecommended}
+        displayTopArtists={displayTopArtists}
+        setDisplayTopArtists={setDisplayTopArtists}
+        fetchRecommendedData={fetchRecommendedData}
+        setPlaylistLink={setPlaylistLink}
+        setShowPlaylist={setShowPlaylist}
+      />
       <div className="stats-container">
-        {/* Display top songs or top artists depending on the displayTopSongs state */}
+        {/* Display top songs, top artists, or recommended songs depending on button pressed */}
         {displayTopSongs && topSongs ? (
-          <div className="top-songs">
-            <div className="song-timeframe-buttons">
-              <button className={songTimeframe === "short_term" ? "active" : ""} onClick={() => setSongTimeframe("short_term")}>1 Month</button>
-              <button className={songTimeframe === "medium_term" ? "active" : ""} onClick={() => setSongTimeframe("medium_term")}>6 Months</button>
-              <button className={songTimeframe === "long_term" ? "active" : ""} onClick={() => setSongTimeframe("long_term")}>All Time</button>
-            </div>
-            <br></br>
-            <br></br>
-            {/* Display top 9 songs in a grid */}
-            <div className="grid">
-              {topSongs.slice(0, 9).map(song => (
-                <div className="container">
-                  <img className="image" src={song.image} alt={song.name} />
-                  <div className="overlay">
-                    <div className="details">
-                      <p><a href={song.link}>{song.name}</a></p>
-                      <p>{song.artists}</p>
-                      <p>Duration: {formatDuration(song.duration)}</p>
-                      <p>Popularity: {song.popularity}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <TopSongsContainer
+            songTimeframe={songTimeframe}
+            setSongTimeframe={setSongTimeframe}
+            topSongs={topSongs}
+            formatDuration={formatDuration}
+          />
         ) : displayTopArtists && topArtists ? (
-          <div className="top-artists">
-            <div className="artist-timeframe-buttons">
-              <button className={artistTimeframe === "short_term" ? "active" : ""} onClick={() => setArtistTimeframe("short_term")}>1 Month</button>
-              <button className={artistTimeframe === "medium_term" ? "active" : ""} onClick={() => setArtistTimeframe("medium_term")}>6 Months</button>
-              <button className={artistTimeframe === "long_term" ? "active" : ""} onClick={() => setArtistTimeframe("long_term")}>All Time</button>
-            </div>
-            <br></br>
-            <br></br>
-            {/* Display top 9 artists in a grid */}
-            <div className="grid">
-              {topArtists.slice(0, 9).map((artist) => (
-                <div className="container">
-                  <img className="image" src={artist.image} alt={artist.name} />
-                  <div className="overlay">
-                    <div className="details">
-                      <p><a href={artist.link}>{artist.name}</a></p>
-                      <p>Popularity: {artist.popularity}</p>
-                      <p>Genre: {artist.genre}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <TopArtistsContainer
+            artistTimeframe={artistTimeframe}
+            setArtistTimeframe={setArtistTimeframe}
+            topArtists={topArtists}
+          />
         ) : (
-          <div className="recommended-songs">
-            <h2> Recommended for you!</h2>
-            <h3> (pssst! you can click the button again to get new recommendations!)</h3>
-            <div className="grid">
-              {recommendedSongs?.slice(0, 9).map(song => (
-                <div className="container">
-                  <img className="image" src={song.image} alt={song.name} />
-                  <div className="overlay">
-                    <div className="details">
-                      <p><a href={song.link}>{song.name}</a></p>
-                      <p>{song.artists}</p>
-                      <p>Duration: {formatDuration(song.duration)}</p>
-                      <p>Popularity: {song.popularity}</p>
-                      {song.previewUrl === null ? <p>Preview not available</p> :
-                        <p>
-                          <audio controls>
-                            <source src={song.previewUrl} type='audio/mp3' />
-                          </audio>
-                        </p>}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="playlist" >
-              {showPlaylist === false ? <button className="playlist-button" onClick={() => createRecommendedPlaylist()}>make it into a playlist!</button> :
-                (showPlaylist === 'loading' ? <h2 className="loading">loading...</h2> :
-                  <iframe className='embedPlayer' src={playlistLink} width="100%" height="152" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; fullscreen" loading="eager"></iframe>
-                )}
-            </div>
-          </div>
+          <RecommendedSongsContainer
+            recommendedSongs={recommendedSongs}
+            createRecommendedPlaylist={createRecommendedPlaylist}
+            playlistLink={playlistLink}
+            showPlaylist={showPlaylist}
+            formatDuration={formatDuration}
+          />
         )
         }
-      </div >
-      <br></br>
+      </div>
+      <button type="button" onClick={imageDownload} id="downloadButton">
+        Download Image
+      </button>
     </>
   );
 }
-
-// Maybe change the grid div classnames to the same so they are the same format and not cluttering the .css

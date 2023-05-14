@@ -39,7 +39,7 @@ function App() {
             <span>y</span><span>i</span><span>p</span><span>p</span><span>e</span><span>e</span><span>i</span><span>f</span><span>y</span></h1>
           <h2>yippee! welcome! click the cat to login to spotify!</h2>
           <button name="loginButton" onClick={userLogin}>
-            <img src="./welcome2.png" alt="welcome-image" className="welcome-img"></img></button>
+            <img src="./welcome.png" alt="welcome-image" className="welcome-img"></img></button>
         </div>
       ) : (
         <>

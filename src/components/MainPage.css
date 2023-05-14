@@ -5,11 +5,36 @@ body {
 
 }
 
-.logout-button {
+/* Logout button */
+#downloadButton,
+.logout {
   display: flex;
   justify-content: right;
   align-items: center;
 }
+
+#downloadButton,
+.logout-button {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: 'Darumadrop One', cursive;
+}
+
+#downloadButton:hover,
+.logout-button:hover {
+  background-color: #88aad8;
+  color: white;
+}
+
 
 .user-info {
   display: flex;
@@ -30,7 +55,7 @@ body {
   justify-content: center;
   align-items: center;
   margin: 20px 0;
-  
+
 }
 
 .category-button {
@@ -55,14 +80,16 @@ body {
 }
 
 /* Styling for timeframe buttons */
-.artist-timeframe-buttons, .song-timeframe-buttons {
+.artist-timeframe-buttons,
+.song-timeframe-buttons {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 20px 0;
 }
 
-.artist-timeframe-buttons button, .song-timeframe-buttons button {
+.artist-timeframe-buttons button,
+.song-timeframe-buttons button {
   background-color: #fff;
   color: #000;
   border: 1px solid #ddd;
@@ -104,7 +131,7 @@ body {
 .container {
   position: relative;
   width: 300px;
-  height: 300px;  
+  height: 300px;
 }
 
 .image {
@@ -138,7 +165,7 @@ body {
 
 /* Styling for song links */
 p a {
-  color:#fff
+  color: #fff
 }
 
 /* Styling for recommended page text */
@@ -154,7 +181,7 @@ h3 {
   font-size: 20px;
   display: flex;
   justify-content: center;
-  align-items: center;   
+  align-items: center;
   margin: 0;
   padding-bottom: 15px;
 }
@@ -169,6 +196,33 @@ h3 {
   border: 1px dotted #88aad8;
   border-radius: 12px;
   background-color: #88aad8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+}
+
+.loading::after {
+  content: "...";
+  animation: ellipsis 1.3s infinite;
+}
+
+@keyframes ellipsis {
+  0% {
+    content: "Loading";
+  }
+
+  33% {
+    content: "Loading.";
+  }
+
+  66% {
+    content: "Loading..";
+  }
+
+  100% {
+    content: "Loading...";
+  }
 }
 
 /* playlist button */
@@ -196,29 +250,11 @@ h3 {
   border: 0px;
 }
 
-/* Centering the footer which includes the logout button */
+
+
+/* Centering the footer which includes the logout button
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-/* Logout button */
-button[name="logoutButton"] {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  font-family: Arial, sans-serif;
-  font-size: 16px;
-  padding: 12px 24px;
-  background-color: #4caf50;
-  color: #fff;
-  cursor: pointer;
-  outline: none;
-  border: none;
-}
-
-button[name="logoutButton"]:hover {
-  background-color: #3e8e41;
-}
+} */
