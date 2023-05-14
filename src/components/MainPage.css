@@ -201,13 +201,13 @@ h3 {
   margin-top: 5px;
   border: 1px dotted #88aad8;
   border-radius: 12px;
-  background-image: linear-gradient(to right, #88aad8, #5684c4, #88aad8);
+  background-image: linear-gradient(to right, #88aad8, #A3BDE0 40%, #88aad8 60%);
   background-size: 200%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 25px;
-  animation: loadingFade 2s linear infinite;
+  font-size: 50px;
+  animation: loadingFade 1s linear infinite;
 }
 
 
