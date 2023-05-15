@@ -26,7 +26,7 @@ function App() {
   const userLogin = async () => {
     let data = await fetch(`${import.meta.env.VITE_REACT_API}/login`);
     data = await data.json();
-    state = data.url.split('state=')[1];
+    let state = data.url.split('state=')[1];
     if(state === data.state){
       window.location.replace(data.url);
     }
