@@ -24,13 +24,6 @@ export default function MainPage({ token, userLogout }) {
   const [artistTimeframe, setArtistTimeframe] = useState('short_term');
   const [playlistLink, setPlaylistLink] = useState('');
 
-  // Logs user out after 1 hour and redirects to the login page.
-  useEffect(() => {
-    setTimeout(() => {
-      userLogout();
-    }, 3600000);
-  }, [userLogout]);
-  
 
   // Format the duration of the song to minutes:seconds
   const formatDuration = (seconds) => {
