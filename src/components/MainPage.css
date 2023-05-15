@@ -5,6 +5,7 @@ body {
 
 }
 
+/* Styling for user info/header */
 .user-info {
     display: flex;
     justify-content: center;
@@ -16,6 +17,10 @@ body {
     width: 80px;
     height: 80px;
     margin: 0 20px;
+}
+
+h1 {
+    margin-bottom: 15px;
 }
 
 /* General styling for buttons */
@@ -40,7 +45,7 @@ body {
     color: #ffffff;
 }
 
-/* General tyling for timeframe and category buttons */
+/* General styling for timeframe and category buttons */
 .timeframe-buttons,
 .category-button-group {
     display: flex;
@@ -49,33 +54,48 @@ body {
     margin: 20px 0;
 }
 
+/* Custom styling for the timeframe buttons */
 .timeframe-buttons button {
     margin: 0;
     font-size: 17px;
     padding: 5px 10px;
     margin: 0 5px;
-    transition: width 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .timeframe-buttons button:hover {
     font-size: 20px;
-    transition: width 0.5s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .timeframe-buttons button.active {
-    width: 200px;
+    width: 250px;
     font-size: 20px;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
+
 /*Styling for specific buttons*/
 #download-button {
     margin-left: auto;
     margin-right: auto;
     display: block;
+    font-size: 18px;
+    padding: 5px 10px;
 }
 
 #logout-button {
-    margin-left: 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 15px;
+    padding: 5px 10px;
+}
+
+#playlist-button {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 24px;
 }
 
 /* Recommended page styling */
@@ -85,6 +105,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 20px 0;
+    margin-top: 0;
 }
 
 .recommended-header .subtext {
@@ -93,7 +114,16 @@ body {
     justify-content: center;
     align-items: center;
     margin: 20px 0;
+    margin-top: 0;
     font-style: italic;
+}
+
+/* Styling for the audio player */
+audio {
+    background-color: #ffffff;
+    opacity: 0.7;
+    width: 275px;
+    height: 40px;
 }
 
 /* Centers the grid of songs or artists */
@@ -107,27 +137,28 @@ body {
 /* Grid styling for songs and artists */
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, 300px);
+    grid-template-columns: repeat(3, 275px);
     grid-gap: 0px;
 }
 
 .container {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 275px;
+    height: 275px;
 }
 
 .image {
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
-    width: 300px;
-    height: 300px;
+    width: 100%;
+    height:100%;
     opacity: 0;
     transition: opacity 0.2s ease-in-out;
     background-color: rgba(0, 0, 0, 0.5);
@@ -144,6 +175,7 @@ body {
     transform: translate(-50%, -50%);
     text-align: center;
     color: #fff;
+    font-size: 15px;
 }
 
 /* Styling for song links */

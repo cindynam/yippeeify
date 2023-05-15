@@ -26,6 +26,7 @@ h1 {
 
 .rotated-title span:nth-child(even) {
   transform: rotate(10deg);
+  color: #ffffff;
 }
 
 .rotated-title span:nth-child(odd) {

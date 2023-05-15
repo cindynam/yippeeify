@@ -40,7 +40,9 @@ export default function RecommendedSongsContainer({
                                 <audio
                                     key={song.previewUrl}
                                     controls
+                                    controlsList="nodownload noplaybackrate"
                                     onPlay={(e) => handleAudioClick(e)}
+                                    volume={0.4}
                                 >
                                     <source src={song.previewUrl} type="audio/mp3" />
                                 </audio>

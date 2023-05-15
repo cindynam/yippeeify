@@ -24,6 +24,14 @@ export default function MainPage({ token, userLogout }) {
   const [artistTimeframe, setArtistTimeframe] = useState('short_term');
   const [playlistLink, setPlaylistLink] = useState('');
 
+  // Logs user out after 1 hour and redirects to the login page.
+  useEffect(() => {
+    setTimeout(() => {
+      userLogout();
+    }, 3600000);
+  }, [userLogout]);
+  
+
   // Format the duration of the song to minutes:seconds
   const formatDuration = (seconds) => {
     let str = '';
@@ -36,18 +44,26 @@ export default function MainPage({ token, userLogout }) {
   // Download the stats as a png image.
   const imageDownload = () => {
     const grid = document.querySelector('.grid');
-    DomToImage.toPng(grid).then((dataUrl) => {
-      const link = document.createElement('a');
-      link.download = 'yippeeify-stats.png';
-      link.href = dataUrl;
-      link.click();
-    });
+    try {
+      DomToImage.toPng(grid).then((dataUrl) => {
+        const link = document.createElement('a');
+        link.download = 'yippeeify-stats.png';
+        link.href = dataUrl;
+        link.click();
+      });
+    } catch (error) {
+      console.error('Error generating image: ', error);
+    }
   }
 
   // Fetches recommended songs from the Spotify API and updates the recommendedSongs page.
   const fetchRecommendedData = async () => {
-    const recommendedSongsData = await fetchRecommendedSongs(token);
-    setRecommendedSongs(recommendedSongsData.data);
+    try {
+      const recommendedSongsData = await fetchRecommendedSongs(token);
+      setRecommendedSongs(recommendedSongsData.data);
+    } catch (error) {
+      console.error('Error refreshing recommended songs data: ', error);
+    }
   };
 
   // Creates a playlist from the recommended songs and updates the playlistLink state.
@@ -160,6 +176,7 @@ export default function MainPage({ token, userLogout }) {
           />
         )}
       </div>
+      {/* Button to download the stats as a png image. */}
       <button
         className="button"
         id="download-button"
