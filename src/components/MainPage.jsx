@@ -4,6 +4,7 @@ import TopSongsContainer from './TopSongsContainer';
 import CategoryButtonsContainer from './CategoryButtonsContainer';
 import TopArtistsContainer from './TopArtistsContainer';
 import RecommendedSongsContainer from './RecommendedSongsContainer';
+import Loading from './Loading';
 import { useState, useEffect } from 'react';
 import { getUserData } from '../functions/userData';
 import { fetchTopSongs } from '../functions/topSongs';
@@ -52,7 +53,12 @@ export default function MainPage({ token, userLogout }) {
   // Fetches recommended songs from the Spotify API and updates the recommendedSongs page.
   const fetchRecommendedData = async () => {
     try {
+      setRecommendedSongs(null);
       const recommendedSongsData = await fetchRecommendedSongs(token);
+      if(recommendedSongsData.error){
+        userLogout();
+        return;
+      }
       setRecommendedSongs(recommendedSongsData.data);
     } catch (error) {
       console.error('Error refreshing recommended songs data: ', error);
@@ -64,6 +70,10 @@ export default function MainPage({ token, userLogout }) {
     setShowPlaylist('loading');
     let songUris = recommendedSongs.map(song => song.uri).join(',');
     let playlistData = await createPlaylist(token, userData.id, songUris);
+    if(playlistData.error){
+      userLogout();
+      return;
+    }
     let link = `https://open.spotify.com/embed/playlist/${playlistData.playlistId}`;
     setPlaylistLink(link);
     // Wait 2 seconds before displaying the playlist to make sure the embed is displayed properly.
@@ -79,9 +89,13 @@ export default function MainPage({ token, userLogout }) {
     // Define an async function to fetch the user data.
     const fetchData = async () => {
       // Call the getUserData function with the token value and wait for the result.
-      const userData = await getUserData(token);
+      const user_data = await getUserData(token);
+      if(user_data.error){
+        userLogout();
+        return;
+      }
       // Update the userData state with the fetched data.
-      setUserData(userData);
+      setUserData(user_data);
     };
     // Call the fetchData function to initiate the data fetching process.
     fetchData();
@@ -92,7 +106,12 @@ export default function MainPage({ token, userLogout }) {
   // Called whenever the token or songTimeframe values change.
   useEffect(() => {
     const fetchData = async () => {
+      setTopSongs(null);
       const topSongsData = await fetchTopSongs(token, songTimeframe);
+      if(topSongsData.error){
+        userLogout();
+        return;
+      }
       setTopSongs(topSongsData.data);
     };
     fetchData();
@@ -103,7 +122,12 @@ export default function MainPage({ token, userLogout }) {
   // Called whenever the token or artistTimeframe values change.
   useEffect(() => {
     const fetchData = async () => {
+      setTopArtists(null);
       const topArtistsData = await fetchTopArtists(token, artistTimeframe);
+      if(topArtistsData.error){
+        userLogout();
+        return;
+      }
       setTopArtists(topArtistsData.data);
     };
     fetchData();
@@ -146,28 +170,30 @@ export default function MainPage({ token, userLogout }) {
       />
       <div className="stats-container">
         {/* Display top songs, top artists, or recommended songs depending on button pressed */}
-        {displayTopSongs && topSongs ? (
-          <TopSongsContainer
-            songTimeframe={songTimeframe}
-            setSongTimeframe={setSongTimeframe}
-            topSongs={topSongs}
-            formatDuration={formatDuration}
-          />
-        ) : displayTopArtists && topArtists ? (
+        { displayTopSongs && 
+          ( topSongs ? 
+            <TopSongsContainer
+              songTimeframe={songTimeframe}
+              setSongTimeframe={setSongTimeframe}
+              topSongs={topSongs}
+              formatDuration={formatDuration}
+            /> : <Loading />) }
+        { displayTopArtists && 
+          ( topArtists ? 
           <TopArtistsContainer
             artistTimeframe={artistTimeframe}
             setArtistTimeframe={setArtistTimeframe}
             topArtists={topArtists}
-          />
-        ) : (
+          /> : <Loading />) }
+        { displayRecommended && 
+          ( recommendedSongs ?
           <RecommendedSongsContainer
             recommendedSongs={recommendedSongs}
             createRecommendedPlaylist={createRecommendedPlaylist}
             playlistLink={playlistLink}
             showPlaylist={showPlaylist}
             formatDuration={formatDuration}
-          />
-        )}
+          /> : <Loading/>) }
       </div>
       {/* Button to download the stats as a png image. */}
       <button

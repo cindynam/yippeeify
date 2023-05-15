@@ -184,6 +184,34 @@ p a {
     color: #fff
 }
 
+.loadingContainer{
+    margin: 50px auto;
+    width: 875px;
+    height: 875px;
+    background-color: #c8d8f1;
+    border-radius: 12px;
+    display: flex;
+}
+.spinner{
+    margin: auto;
+    border-left: 25px solid #c8d8f1;
+    border-right: 25px solid #88aad8;
+    border-top: 25px solid #c8d8f1;
+    border-bottom: 25px solid #c8d8f1;
+    width: 200px;
+    height: 200px;
+    border-radius: 150px;
+    animation: loading .7s ease-in-out infinite;
+}
+@keyframes loading {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
 /* Styling for the loading screen */
 .loading {
     color: white;
@@ -203,7 +231,7 @@ p a {
 }
 
 .loading::after {
-    content: "...";
+    content: "Loading.";
     animation: ellipsis 1s infinite alternate;
 }
 

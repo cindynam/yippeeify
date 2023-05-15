@@ -24,9 +24,15 @@ function App() {
 
   // Logs user in by fetching the url from the backend and redirecting the user to the url.
   const userLogin = async () => {
-    let url = await fetch(`${import.meta.env.VITE_REACT_API}/login`);
-    url = await url.json();
-    window.location.replace(url.url);
+    let data = await fetch(`${import.meta.env.VITE_REACT_API}/login`);
+    data = await data.json();
+    state = data.url.split('state=')[1];
+    if(state === data.state){
+      window.location.replace(data.url);
+    }
+    else{
+      window.location.replace(import.meta.env.VITE_REACT_URL);
+    }
   }
 
   // Logs user out by removing the token from local storage and setting the token to null.
