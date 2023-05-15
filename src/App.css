@@ -45,6 +45,7 @@ button[name="loginButton"] img {
 }
 button[name="loginButton"]:hover {
   opacity: 0.8;
+  transition: 0.3s;
 }
 
 /* Footer link styling */

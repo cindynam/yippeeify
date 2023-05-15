@@ -89,7 +89,7 @@ export default function RecommendedSongsContainer({
     return (
         <div className="recommended-songs">
             <div className="recommended-header">
-                <p> Recommended for you!</p>
+                <p>Recommended for you!</p>
                 <p className="subtext">
                     (pssst! you can click the button again to get new recommendations!)
                 </p>

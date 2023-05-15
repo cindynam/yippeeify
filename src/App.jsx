@@ -4,6 +4,8 @@ import MainPage from './components/MainPage';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
+
+  // If there is no token and the url includes 'code', then fetch the token from the backend.
   if (!token && window.location.href.includes('code')) {
     let auth_code = window.location.href.split('code=')[1];
     fetch(`${import.meta.env.VITE_REACT_API}/token`, {
@@ -20,12 +22,14 @@ function App() {
     });
   }
 
+  // Logs user in by fetching the url from the backend and redirecting the user to the url.
   const userLogin = async () => {
     let url = await fetch(`${import.meta.env.VITE_REACT_API}/login`);
     url = await url.json();
     window.location.replace(url.url);
   }
 
+  // Logs user out by removing the token from local storage and setting the token to null.
   const userLogout = () => {
     localStorage.removeItem('token');
     setToken(null);
