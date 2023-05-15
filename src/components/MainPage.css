@@ -1,274 +1,218 @@
 body {
-  background-color: #c8d8f1;
-  color: #88aad8;
-  font-family: 'Darumadrop One', cursive;
+    background-color: #c8d8f1;
+    color: #88aad8;
+    font-family: 'Darumadrop One', cursive;
 
 }
-
-/* Logout button */
-.logout {
-  display: flex;
-  justify-content: right;
-  align-items: center;
-}
-
-.button {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #ddd;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px;
-  margin: 4px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-family: 'Darumadrop One', cursive;
-}
-
-.button:hover {
-  background-color: #88aad8;
-  color: white;
-}
-
-#downloadButton {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-
 
 .user-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #user-icon {
-  border-radius: 50%;
-  width: 80px;
-  height: 80px;
-  margin: 0 20px;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin: 0 20px;
 }
 
-/* Styling for category buttons */
+/* General styling for buttons */
+.button {
+    background-color: #c8d8f1;
+    color: #88aad8;
+    border: 1px solid #88aad8;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Darumadrop One', cursive;
+}
+
+.button.active,
+.button:hover {
+    background-color: #88aad8;
+    color: #ffffff;
+}
+
+/* General tyling for timeframe and category buttons */
+.timeframe-buttons,
 .category-button-group {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
 }
 
-/* .category-button {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #ddd;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px;
-  margin: 4px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-family: 'Darumadrop One', cursive;
-} */
-
-/* .category-button:hover,
-.category-button.active {
-  background-color: #88aad8;
-  color: white;
-} */
-
-/* Styling for timeframe buttons */
-.artist-timeframe-buttons,
-.song-timeframe-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
+.timeframe-buttons button {
+    margin: 0;
+    font-size: 17px;
+    padding: 5px 10px;
+    margin: 0 5px;
+    transition: width 0.5s ease-in-out;
 }
 
-/* .artist-timeframe-buttons button,
-.song-timeframe-buttons button {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #ddd;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 20px;
-  margin: 4px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-family: 'Darumadrop One', cursive;
-} */
+.timeframe-buttons button:hover {
+    font-size: 20px;
+    transition: width 0.5s ease-in-out;
+}
 
-/* .song-timeframe-buttons button:hover,
-.song-timeframe-buttons button.active,
-.artist-timeframe-buttons button:hover,
-.artist-timeframe-buttons button.active {
-  background-color: #88aad8;
-  color: white;
-} */
+.timeframe-buttons button.active {
+    width: 200px;
+    font-size: 20px;
+    transition: all 0.2s ease-in-out;
+}
+/*Styling for specific buttons*/
+#download-button {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#logout-button {
+    margin-left: 0;
+}
+
+/* Recommended page styling */
+.recommended-header p:first-child {
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.recommended-header .subtext {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    font-style: italic;
+}
 
 /* Centers the grid of songs or artists */
 .stats-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
 }
 
 /* Grid styling for songs and artists */
-
 .grid {
-  display: grid;
-  grid-template-columns: repeat(3, 300px);
-  grid-gap: 0px;
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    grid-gap: 0px;
 }
 
 .container {
-  position: relative;
-  width: 300px;
-  height: 300px;
+    position: relative;
+    width: 300px;
+    height: 300px;
 }
 
 .image {
-  width: 300px;
-  height: 300px;
+    width: 300px;
+    height: 300px;
 }
 
 .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 300px;
-  height: 300px;
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
-  background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .container:hover .overlay {
-  opacity: 1;
+    opacity: 1;
 }
 
 .details {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
 }
 
 /* Styling for song links */
 p a {
-  color: #fff
-}
-
-/* Styling for recommended page text */
-h2 {
-  font-size: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0;
-}
-
-h3 {
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  padding-bottom: 15px;
+    color: #fff
 }
 
 /* Styling for the loading screen */
 .loading {
-  color: white;
-  margin: 0;
-  padding: 0;
-  height: 150px;
-  margin-top: 5px;
-  border: 1px dotted #88aad8;
-  border-radius: 12px;
-  background-image: linear-gradient(to right, #88aad8, #A3BDE0 40%, #88aad8 60%);
-  background-size: 200%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 50px;
-  animation: loadingFade 1s linear infinite;
+    color: white;
+    margin: 0;
+    padding: 0;
+    height: 150px;
+    margin-top: 5px;
+    border: 1px dotted #88aad8;
+    border-radius: 12px;
+    background-image: linear-gradient(to right, #88aad8, #A3BDE0 40%, #88aad8 60%);
+    background-size: 200%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    animation: loadingFade 1s linear infinite;
 }
 
-
-
 .loading::after {
-  content: "...";
-  animation: ellipsis 1s infinite alternate;
+    content: "...";
+    animation: ellipsis 1s infinite alternate;
 }
 
 @keyframes loadingFade {
-	0% {
-		background-position: 0%;
-	}
-	50% {
-		background-position: 100%;
-	}
-	100% {
-		background-position: 200%;
-	}
+    0% {
+        background-position: 0%;
+    }
+
+    50% {
+        background-position: 100%;
+    }
+
+    100% {
+        background-position: 200%;
+    }
 }
 
 @keyframes ellipsis {
 
-  0% {
-    content: "Loading.";
-  }
+    0% {
+        content: "Loading.";
+    }
 
-  50% {
-    content: "Loading..";
-  }
+    50% {
+        content: "Loading..";
+    }
 
-  100% {
-    content: "Loading...";
-  }
-}
-
-/* playlist button */
-.playlist-button {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #ddd;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: block;
-  font-size: 20px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 24px;
-  cursor: pointer;
-  border-radius: 5px;
-  font-family: 'Darumadrop One', cursive;
+    100% {
+        content: "Loading...";
+    }
 }
 
 /* Styling for the embedded playlist */
 .embedPlayer {
-  margin-top: 5px;
-  border-radius: 0px;
-  border: 0px;
+    margin-top: 5px;
+    border-radius: 0px;
+    border: 0px;
 }
 
 /* Centering the footer */
 .footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

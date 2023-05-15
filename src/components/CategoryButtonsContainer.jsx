@@ -14,7 +14,6 @@ export default function CategoryButtonsContainer({
         <div className="category-button-group">
             <button
                 className={`button ${displayTopSongs ? "active" : ""}`}
-                id="category-button"
                 onClick={() => {
                     setDisplayTopSongs(true);
                     setDisplayTopArtists(false);
@@ -25,7 +24,6 @@ export default function CategoryButtonsContainer({
             </button>
             <button
                 className={`button ${displayTopArtists ? "active" : ""}`}
-                id="category-button"
                 onClick={() => {
                     setDisplayTopSongs(false);
                     setDisplayTopArtists(true);
@@ -36,7 +34,6 @@ export default function CategoryButtonsContainer({
             </button>
             <button
                 className={`button ${displayRecommended ? "active" : ""}`}
-                id="category-button"
                 onClick={() => {
                     setDisplayTopSongs(false);
                     setDisplayTopArtists(false);

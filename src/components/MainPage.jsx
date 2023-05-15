@@ -26,7 +26,7 @@ export default function MainPage({ token, userLogout }) {
 
   // Format the duration of the song to minutes:seconds
   const formatDuration = (seconds) => {
-    let str = ''
+    let str = '';
     str += Math.trunc(seconds / 60);
     let s = seconds % 60;
     str += s < 10 ? `:0${s}` : `:${s}`;
@@ -44,7 +44,6 @@ export default function MainPage({ token, userLogout }) {
     });
   }
 
-
   // Fetches recommended songs from the Spotify API and updates the recommendedSongs page.
   const fetchRecommendedData = async () => {
     const recommendedSongsData = await fetchRecommendedSongs(token);
@@ -56,7 +55,7 @@ export default function MainPage({ token, userLogout }) {
     setShowPlaylist('loading');
     let songUris = recommendedSongs.map(song => song.uri).join(',');
     let playlistData = await createPlaylist(token, userData.id, songUris);
-    let link = `https://open.spotify.com/embed/playlist/${playlistData.playlistId}`
+    let link = `https://open.spotify.com/embed/playlist/${playlistData.playlistId}`;
     setPlaylistLink(link);
     // Wait 2 seconds before displaying the playlist to make sure the embed is displayed properly.
     setTimeout(() => {
@@ -110,15 +109,13 @@ export default function MainPage({ token, userLogout }) {
 
   return (
     <>
-      <div className="logout">
-        <button
-          className="button"
-          id="logout-button"
-          onClick={() => userLogout()}
-        >
-          Logout
-        </button>
-      </div>
+      <button
+        className="button"
+        id="logout-button"
+        onClick={() => userLogout()}
+      >
+        Logout
+      </button>
       {/* Display user info with a greeting */}
       {userData && (
         <div className="user-info">
