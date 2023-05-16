@@ -10,7 +10,6 @@ export default function TopSongsContainer({ topSongs, songTimeframe, setSongTime
     ));
 
     const songItems = topSongs
-        .slice(0, 9)
         .map((song) => (
             <div key={song.name} className="container">
                 <img className="image" src={song.image} alt={song.name} />

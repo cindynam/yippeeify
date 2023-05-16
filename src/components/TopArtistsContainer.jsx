@@ -10,7 +10,6 @@ export default function TopArtistsContainer({ topArtists, artistTimeframe, setAr
     ));
 
     const artistItems = topArtists
-        .slice(0, 9)
         .map((artist) => (
             <div key={artist.name} className="container">
                 <img className="image" src={artist.image} alt={artist.name} />
