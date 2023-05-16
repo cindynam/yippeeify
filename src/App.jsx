@@ -7,32 +7,35 @@ function App() {
 
   // If there is no token and the url includes 'code', then fetch the token from the backend.
   if (!token && window.location.href.includes('code')) {
-    let auth_code = window.location.href.split('code=')[1];
-    fetch(`${import.meta.env.VITE_REACT_API}/token`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ code: auth_code })
-    }).then(t =>
-      t.json()
-    ).then((t) => {
-      localStorage.setItem('token', t.token);
+    let uri = window.location.href.split('&state=');
+    let state = uri[1];
+    let auth_code = uri[0].split('code=')[1];
+    if(localStorage.getItem('state') === state){
+      fetch(`${import.meta.env.VITE_REACT_API}/token`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ code: auth_code })
+      }).then(t =>
+        t.json()
+      ).then((t) => {
+        localStorage.setItem('token', t.token);
+        localStorage.removeItem('state');
+        window.location.replace(import.meta.env.VITE_REACT_URL);
+      });
+    }
+    else {
       window.location.replace(import.meta.env.VITE_REACT_URL);
-    });
+    }
   }
 
   // Logs user in by fetching the url from the backend and redirecting the user to the url.
   const userLogin = async () => {
     let data = await fetch(`${import.meta.env.VITE_REACT_API}/login`);
     data = await data.json();
-    let state = data.url.split('state=')[1];
-    if(state === data.state){
-      window.location.replace(data.url);
-    }
-    else{
-      window.location.replace(import.meta.env.VITE_REACT_URL);
-    }
+    localStorage.setItem('state',data.state);
+    window.location.replace(data.url);
   }
 
   // Logs user out by removing the token from local storage and setting the token to null.
