@@ -135,7 +135,7 @@ audio {
     margin: 20px 0;
 }
 
-/* Grid styling for songs and artists */
+/* Grid styling */
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 275px);
@@ -179,7 +179,7 @@ audio {
     font-size: 15px;
 }
 
-/* Styling for song links */
+/* Styling for links */
 p a {
     color: #fff
 }
@@ -212,7 +212,7 @@ p a {
     }
 }
 
-/* Styling for the loading screen */
+/* Styling for the embed loading screen */
 .loading {
     color: white;
     margin: 0;
