@@ -60,7 +60,7 @@ function App() {
         </>
       )}
       <div className="footer">
-        <p>Created by <a href="https://github.com/cindynam">Cindy Nam</a></p>
+        <p>Created by <a href="https://github.com/cindynam">Cindy N.</a></p>
       </div>
     </>
   )
